@@ -145,8 +145,7 @@ const Project: React.FC = () => {
   return (
     <div className="my-30">
       <h1 className=" my-5 font-oswald text-6xl flex justify-center w-full  ">
-        About Me
-      </h1>
+ ProJects      </h1>
       <div className=" flex flex-wrap justify-center">
         {projects.map((project) => (
           <ProjectCard key={project.id} {...project} />
