@@ -9,7 +9,7 @@ interface Project {
   desc: string;
   img: string;
   link: string;
-  tags: string[]; // Add the tags array to the interface
+   tags: Array<string>; // Add the tags array to the interface
 }
 
 const projects: Project[] = [
@@ -96,14 +96,14 @@ const projects: Project[] = [
   },
 ];
 
-const ProjectCard: React.FC<Project> = ({
+function ProjectCard({
   color,
   title,
   desc,
   img,
   link,
   tags,
-}) => {
+}: Project): React.JSX.Element {
   const isVideo = link.includes("linkedin.com/feed/update/urn:li:activity:");
 
   return (
@@ -139,9 +139,9 @@ const ProjectCard: React.FC<Project> = ({
       </div>
     </div>
   );
-};
+}
 
-const Project: React.FC = () => {
+function Project(): React.JSX.Element {
   return (
     <div className="my-30">
       <h1 className=" my-5 font-oswald text-6xl flex justify-center w-full  ">
@@ -153,6 +153,6 @@ const Project: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Project;

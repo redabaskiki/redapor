@@ -1,11 +1,11 @@
  import { oswald, poppins, roboto } from "./fonts";
 import "./globals.css";
  
-export default function RootLayout({
-  children,
-}: Readonly<{
+type RootLayoutProps = {
   children: React.ReactNode;
-}>) {
+};
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
