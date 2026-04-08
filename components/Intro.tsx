@@ -10,7 +10,7 @@ gsap.registerPlugin(useGSAP);
   timeline: gsap.core.Timeline | undefined;
 }
 
-const Intro: React.FC<IntroProps> = ({ timeline }) => {
+const Intro = ({ timeline }: IntroProps) => {
   // Explicitly type the ref as HTMLDivElement
   const intro = useRef<HTMLDivElement>(null);
 

@@ -16,7 +16,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const handleScroll = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    event: React.MouseEvent,
     href: string
   ) => {
     event.preventDefault();

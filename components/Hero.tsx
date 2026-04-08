@@ -26,7 +26,7 @@ interface HeroProps {
        audio.volume = 0.2;
        audio.play().catch(() => {});
      };
-const Hero: React.FC<HeroProps> = ({ timeline }) => {
+const Hero = ({ timeline }: HeroProps) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
 
