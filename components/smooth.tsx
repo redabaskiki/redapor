@@ -42,7 +42,7 @@ const SmoothParallax = () => {
     >
       <Image
         ref={imageRef}
-        src="/code.JPG" // Use your actual image path
+        src="/code.jpg" // Use your actual image path
         alt="Parallax effect"
         width={800}
         height={800}
