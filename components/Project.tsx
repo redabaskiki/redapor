@@ -1,13 +1,14 @@
 "use client";
 
 import { projects } from "@/constant";
+import type { Project as ProjectItem } from "@/constant";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
  
 // 3. Child Component (Project Card)
-function ProjectCard({ color, title, desc, img, link, tags }: Project) {
+function ProjectCard({ color, title, desc, img, link, tags }: ProjectItem) {
   const isVideo = link.includes("linkedin.com");
 
   return (
