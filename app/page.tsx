@@ -1,20 +1,20 @@
+"use client"
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import Project from "@/components/Project";
+import ScrollToTop from "@/components/scrolltotop";
 import Skills from "@/components/Skills";
+import Intro from "@/components/Intro";
+import { useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import SmoothParallax from "@/components/smooth";
+import Experiences from "@/components/experiences";
+gsap.registerPlugin(useGSAP);
 
-export const metadata = {
-  title: "Reda Baskiki — Crafting Digital Products that Scale",
-  description:
-    "From concept to deployment, I build robust, scalable web solutions. Explore my portfolio featuring advanced dashboards, e-commerce systems, and modern UI/UX.",
-  openGraph: {
-    title: "Reda Baskiki Portfolio",
-    description: "Bridging the gap between clean code and business goals.",
-    type: "website",
-  },
-};
+
 
 // Moved inside the module scope correctly
 const jsonLd = {
@@ -39,6 +39,18 @@ const jsonLd = {
 };
 
 export default function Home() {
+ const container = useRef<HTMLDivElement>(null);
+
+ // Type the state as gsap.core.Timeline
+ const [tl, setTl] = useState<gsap.core.Timeline>();
+
+ useGSAP(
+   () => {
+     const newTl = gsap.timeline();
+     setTl(newTl);
+   },
+   { scope: container },
+ );
   return (
     <div>
       {/* Schema injection */}
@@ -50,7 +62,11 @@ export default function Home() {
       <Navbar />
       <main>
         <section id="home">
-          <Hero />
+        <div ref={container}>
+         <Intro timeline={tl}/>
+          <Hero timeline={tl}/>
+        </div>
+        <SmoothParallax />
         </section>
         <section id="about">
           <About />
@@ -59,12 +75,14 @@ export default function Home() {
           <Skills />
         </section>
         <section id="projects">
-          <Project />
+          <Project /> 
+          <Experiences/>
         </section>
         <section id="contact">
           <Contact />
         </section>
       </main>
+      <ScrollToTop/>
     </div>
   );
 }

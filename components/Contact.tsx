@@ -13,13 +13,23 @@
      setError(false);
      setSuccess(false);
 
-     if (form.current) {
+    const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      setError(true);
+      console.error("Missing EmailJS environment variables.");
+      return;
+    }
+
+    if (form.current) {
        emailjs
          .sendForm(
-           process.env.NEXT_PUBLIC_SERVICE_ID!,
-           process.env.NEXT_PUBLIC_TEMPLATE_ID!,
+          serviceId,
+          templateId,
            form.current,
-           process.env.NEXT_PUBLIC_PUBLIC_KEY
+          publicKey
          )
          .then(
            () => {
@@ -35,10 +45,10 @@
 
    return (
      <div className=" flex justify-center">
-       <div className="flex   flex-col border-1 rounded-2xl mb-20 w-full  lg:w-1/2 mx-3">
-         <h2 className="font-oswald text-center text-3xl md:text-4xl lg;text-6xl py-10 ">
-           Hire Me / Intern Me!
-         </h2>
+       <div className="flex   flex-col border-1 rounded-2xl mb-20 w-full  lg:w-1/2 p-3">
+         <h2 className="font-oswald text-center text-3xl md:text-4xl lg:text-6xl py-10 ">
+ HOW Can I help You
+          </h2>
 
          <form
            onSubmit={sendEmail}
@@ -61,7 +71,7 @@
            />
            <p className="px-2">Regards</p>
            <button
-             className="bg-purple-200 rounded font-semibold text-gray-600 p-4 hover:bg-#2C5364"
+             className="bg-purple-200 rounded font-semibold text-gray-600 p-4 hover:bg-#2C5364  "
              type="submit"
            >
              Send

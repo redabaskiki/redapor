@@ -15,6 +15,9 @@ import {
 import { GiDatabase } from "react-icons/gi";
 import { SiGit, SiFigma } from "react-icons/si"; // Also importing these here just in case
 import { SiMui } from "react-icons/si";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
  
 interface Skill {
   name: string;
@@ -35,13 +38,38 @@ const skills: Skill[] = [
   { name: "Redux", Icon: SiRedux },
   { name: "Vite", Icon: SiVite },
   { name: "Mongoose", Icon: GiDatabase },
+  { name: "gsap", Icon: SiTailwindcss}, // Using GiDatabase as a placeholder icon for gsap
   { name: "Git", Icon: SiGit },
   { name: "Figma", Icon: SiFigma },
 ];
+gsap.registerPlugin(ScrollTrigger);
 
 const Skills: React.FC = () => {
+  useGSAP(() => {
+    gsap.set(".about", {
+      y: 100,
+      opacity: 0.1,
+      scale: 0.9,
+    });
+
+    // 2. The Scrub Animation
+    gsap.to(".about", {
+      y: -20, // Moves to its natural position
+      opacity: 1,
+      scale: 1,
+      stagger: 0.2, // Reduced from 0.9 to keep cards appearing closer together
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".about",
+        start: "top 90%", // Starts when grid top hits 70% of screen
+        end: "bottom 50%", // Finishes when grid bottom hits 20%
+        scrub: 1.4, // Smooth 'catch-up' time of 1.4 seconds
+        markers: false, // Remember to remove this for production!
+      },
+    });
+  });
   return (
-    <div className="mx-3  border-1 border-amber-50 rounded-2xl flex flex-col md:flex-row pt-3 my-6 mb-20  ">
+    <div className="m-auto about w-1/2 p-5 border-1 border-amber-50 rounded-2xl flex flex-col md:flex-row pt-3 my-6 mb-20  ">
       <h2 className="flex justify-center text-4xl  lg:text-6xl w-full my-5 md:w-1/3">
         Skills
       </h2>
